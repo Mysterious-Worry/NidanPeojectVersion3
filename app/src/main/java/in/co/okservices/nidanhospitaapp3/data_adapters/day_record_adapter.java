@@ -1,6 +1,7 @@
 package in.co.okservices.nidanhospitaapp3.data_adapters;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -29,8 +30,8 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
     @NonNull
     @Override
     public myViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Write code
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.day_details_row, parent, false);
+        return new myViewHolder(view);
     }
 
     @Override
