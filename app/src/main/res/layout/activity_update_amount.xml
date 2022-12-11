@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UpdateAmount">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu"
+            android:gravity="center"
+            android:text="Update Amounts\nof Types"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_normal_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/normal_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_normal_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_paper_valid_emergency_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/paper_valid_emergency_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_paper_valid_emergency_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_emergency_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/emergency_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_emergency_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_discount_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/discount_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_discount_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_normal_paper_valid_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/normal_paper_valid_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_normal_paper_valid_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginVertical="10dp">
+
+            <Button
+                android:id="@+id/edit_cancel_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/ic_baseline_edit_24"
+                android:layout_marginRight="10dp"/>
+
+            <EditText
+                android:id="@+id/cancel_amount"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:paddingHorizontal="10dp"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:ems="10"
+                android:fontFamily="@font/ubuntu"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/update_cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_bg"
+                android:text="UPDATE"
+                android:layout_marginHorizontal="10dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

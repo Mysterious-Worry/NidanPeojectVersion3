@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="normal_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#D10000</item>
+    </style>
+
+    <style name="emergency_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#D18400</item>
+    </style>
+
+    <style name="normal_paper_valid_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#49D100</item>
+    </style>
+
+    <style name="paper_valid_emergency_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#00D1A7</item>
+    </style>
+
+    <style name="discount_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#0023D1</item>
+    </style>
+
+    <style name="cancel_cbx" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorControlNormal">#A400D1</item>
+    </style>
+
+</resources>

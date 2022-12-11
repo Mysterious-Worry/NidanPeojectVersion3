@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Niddan Hospital</string>
+
+    <!-- DB Details -->
+    <string name="db_name">PatientLibrary.db</string>
+    <string name="db_version">2</string>
+    <string name="day_record_table">day_record</string>
+    <string name="patient_table">my_patients</string>
+    <string name="values_table">values</string>
+
+
+</resources>
