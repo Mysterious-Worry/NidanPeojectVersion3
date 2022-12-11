@@ -381,7 +381,6 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
         discount_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.discount_cbx);
         cancel_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.cancel_cbx);
     }
-
     private void updateDayDetails(int amount, String type_count){
         try {
             int currentPatientCount = myDB.senderCell("patient_count");
@@ -400,7 +399,6 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
-
     private void removeDayDetails(String type){
         short amount = 0;
         switch (type) {
