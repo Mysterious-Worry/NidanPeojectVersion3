@@ -80,11 +80,19 @@ public class MainActivity extends AppCompatActivity {
         user_setting_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RotateAnimation rotateAnimation = (RotateAnimation) AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotate_anim);
+                RotateAnimation rotateAnimation = (RotateAnimation)AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotate_anim);
                 view.startAnimation(rotateAnimation);
             }
         });
 
+        day_record_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent dayIntent = new Intent(MainActivity.this, DayRecordActivity.class);
+                startActivity(dayIntent);
+                finish();
+            }
+        });
     }
 
     private void initViews(){

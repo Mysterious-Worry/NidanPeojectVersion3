@@ -214,4 +214,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         return rv;
     }
+
+    public Cursor fetchDayData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + DAY_TABLE_NAME;
+        return db.rawQuery(query, null);
+    }
 }
