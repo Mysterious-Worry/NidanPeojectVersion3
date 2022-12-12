@@ -16,7 +16,8 @@
         <activity
             android:name=".DayRecordActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".UpdateAmount"
             android:exported="false" />
