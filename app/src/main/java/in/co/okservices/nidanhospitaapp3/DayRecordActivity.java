@@ -8,6 +8,8 @@ import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,6 +28,7 @@ public class DayRecordActivity extends AppCompatActivity {
     private Button select_btn, search_btn;
     private int mYear, mMonth, mDay;
     private EditText selected_date_txt;
+    MyDatabaseHelper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +76,15 @@ public class DayRecordActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                selected_date_txt.setText(year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
-
+                                // Changing this code for not getting into wright format
+                                String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
+                                String newDate;
+                                if(date.length() < 9){
+                                    newDate = helper.addZeroInDate(date);
+                                    selected_date_txt.setText(newDate);
+                                } else {
+                                    selected_date_txt.setText(date);
+                                }
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -113,6 +123,7 @@ public class DayRecordActivity extends AppCompatActivity {
     }
 
     private void initViews(){
+        helper = new MyDatabaseHelper(this);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         select_btn = (Button)findViewById(R.id.select_btn);
         search_btn = (Button)findViewById(R.id.search_btn);

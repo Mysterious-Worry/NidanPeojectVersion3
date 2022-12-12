@@ -122,6 +122,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         java.sql.Date date = new java.sql.Date(millis);
         return date.toString().trim();
     }
+    public String addZeroInDate(String date){
+        StringBuilder sb = new StringBuilder(date);
+        sb.insert(5, '0');
+        sb.insert(9, '0');
+        return sb.toString();
+    }
     public Cursor readalldata() {
         SQLiteDatabase db = this.getWritableDatabase();
         String qry = "SELECT * FROM my_patients WHERE date = '" + getDate() + "'";

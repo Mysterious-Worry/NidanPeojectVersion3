@@ -8,5 +8,8 @@
     <string name="patient_table">my_patients</string>
     <string name="values_table">values</string>
 
-
+    <string-array name="day_record_search_types">
+        <item>Select Months</item>
+        <item>Select Date</item>
+    </string-array>
 </resources>
