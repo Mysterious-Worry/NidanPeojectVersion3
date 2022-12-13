@@ -76,14 +76,21 @@ public class DayRecordActivity extends AppCompatActivity {
                             public void onDateSet(DatePicker view, int year,
                                                   int monthOfYear, int dayOfMonth) {
 
-                                // Changing this code for not getting into wright format
-                                String date = year + "-" + (monthOfYear + 1) + "-" + dayOfMonth;
-                                String newDate;
-                                if(date.length() < 9){
-                                    newDate = helper.addZeroInDate(date);
-                                    selected_date_txt.setText(newDate);
-                                } else {
+                                try {
+                                    String sMonthOfYear, sDayOfMonth;
+                                    sMonthOfYear = Integer.toString(monthOfYear+1);
+                                    sDayOfMonth = Integer.toString(dayOfMonth);
+                                    if (sMonthOfYear.length() == 1 ) {
+                                        sMonthOfYear = "0" + String.valueOf(sMonthOfYear);
+                                    }
+                                    if (sDayOfMonth.length() < 2) {
+                                        sDayOfMonth = "0" + dayOfMonth;
+                                    }
+
+                                    String date = year + "-" + (sMonthOfYear) + "-" + sDayOfMonth;
                                     selected_date_txt.setText(date);
+                                } catch(Exception ex){
+                                    Toast.makeText(DayRecordActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         }, mYear, mMonth, mDay);
