@@ -25,7 +25,7 @@ public class DayRecordActivity extends AppCompatActivity {
 
     ArrayList<day_record_madel> dataHolder;
     RecyclerView recyclerView;
-    private Button select_btn, search_btn;
+    private Button select_btn, search_btn, search_by_month_btn;
     private int mYear, mMonth, mDay;
     private EditText selected_date_txt;
     MyDatabaseHelper helper;
@@ -36,30 +36,8 @@ public class DayRecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_day_record);
         initViews();
 
-        try{
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            Cursor cursor = new MyDatabaseHelper(this).fetchDayData();
-            dataHolder = new ArrayList<>();
-            while (cursor.moveToNext()){
-                day_record_madel madel = new day_record_madel(
-                        cursor.getString(0),
-                        cursor.getString(1),
-                        cursor.getString(2),
-                        cursor.getString(3),
-                        cursor.getString(4),
-                        cursor.getString(5),
-                        cursor.getString(6),
-                        cursor.getString(7),
-                        cursor.getString(8),
-                        cursor.getString(9)
-                );
-                dataHolder.add(madel);
-            }
-            day_record_adapter adapter = new day_record_adapter(dataHolder, this);
-            recyclerView.setAdapter(adapter);
-        } catch(Exception ex) {
-            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-        }
+        Cursor cursor = new MyDatabaseHelper(this).fetchDayData();
+        loadData(cursor);
 
         select_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,28 +79,22 @@ public class DayRecordActivity extends AppCompatActivity {
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try{
-                    recyclerView.setLayoutManager(new LinearLayoutManager(DayRecordActivity.this));
-                    Cursor cursor = new MyDatabaseHelper(DayRecordActivity.this).fetchDayData(selected_date_txt.getText().toString().trim());
-                    dataHolder = new ArrayList<>();
-                    while (cursor.moveToNext()){
-                        day_record_madel madel = new day_record_madel(
-                                cursor.getString(0),
-                                cursor.getString(1),
-                                cursor.getString(2),
-                                cursor.getString(3),
-                                cursor.getString(4),
-                                cursor.getString(5),
-                                cursor.getString(6),
-                                cursor.getString(7),
-                                cursor.getString(8),
-                                cursor.getString(9)
-                        );
-                        dataHolder.add(madel);
-                    }
-                    day_record_adapter adapter = new day_record_adapter(dataHolder, DayRecordActivity.this);
-                    recyclerView.setAdapter(adapter);
-                } catch(Exception ex) {
+                Cursor cursor = new MyDatabaseHelper(DayRecordActivity.this).fetchDayData(selected_date_txt.getText().toString().trim());
+                loadData(cursor);
+            }
+        });
+
+        search_by_month_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    String month = selected_date_txt.getText().toString().trim();
+                    StringBuilder rmv = new StringBuilder(month);
+                    rmv = rmv.delete(7, 10);
+                    selected_date_txt.setText(rmv.toString());
+                    Cursor cursor = new MyDatabaseHelper(DayRecordActivity.this).fetchMonthData(rmv.toString());
+                    loadData(cursor);
+                } catch (Exception ex){
                     Toast.makeText(DayRecordActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -134,6 +106,33 @@ public class DayRecordActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
         select_btn = (Button)findViewById(R.id.select_btn);
         search_btn = (Button)findViewById(R.id.search_btn);
+        search_by_month_btn = (Button)findViewById(R.id.search_by_month_btn);
         selected_date_txt = (EditText)findViewById(R.id.selected_date_txt);
+    }
+
+    private void loadData(Cursor cursor){
+        try{
+            recyclerView.setLayoutManager(new LinearLayoutManager(DayRecordActivity.this));
+            dataHolder = new ArrayList<>();
+            while (cursor.moveToNext()){
+                day_record_madel madel = new day_record_madel(
+                        cursor.getString(0),
+                        cursor.getString(1),
+                        cursor.getString(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getString(5),
+                        cursor.getString(6),
+                        cursor.getString(7),
+                        cursor.getString(8),
+                        cursor.getString(9)
+                );
+                dataHolder.add(madel);
+            }
+            day_record_adapter adapter = new day_record_adapter(dataHolder, DayRecordActivity.this);
+            recyclerView.setAdapter(adapter);
+        } catch(Exception ex) {
+            Toast.makeText(DayRecordActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

@@ -19,8 +19,9 @@
             android:layout_weight="1"
             android:text="Select"
             android:layout_gravity="center"
-            android:layout_marginLeft="0dp"
-            android:background="@drawable/btn_bg"/>
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/btn_bg"
+            android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/selected_date_txt"
@@ -45,7 +46,8 @@
             android:text="Search"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:background="@drawable/btn_bg"/>
+            android:background="@drawable/btn_bg"
+            android:textColor="@color/white"/>
         <Button
             android:id="@+id/search_by_month_btn"
             android:layout_width="95dp"
@@ -54,7 +56,8 @@
             android:text="Search Month"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            android:background="@drawable/btn_bg"/>
+            android:background="@drawable/btn_bg"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
