@@ -1,9 +1,11 @@
 package in.co.okservices.nidanhospitaapp3.data_adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import in.co.okservices.nidanhospitaapp3.EditPreviousDayRecord;
 import in.co.okservices.nidanhospitaapp3.R;
 import in.co.okservices.nidanhospitaapp3.costom_packages.MyDatabaseHelper;
 import in.co.okservices.nidanhospitaapp3.data_models.day_record_madel;
@@ -36,6 +39,7 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
+        int pos = position;
         holder.date.setText(dataHolder.get(position).getDate());
         holder.patient_count.setText(dataHolder.get(position).getPatient_count());
         holder.collected_money.setText(dataHolder.get(position).getCollected_money());
@@ -45,6 +49,15 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
         holder.paper_valid_emergency_count.setText(dataHolder.get(position).getPaper_valid_emergency_count());
         holder.discount_count.setText(dataHolder.get(position).getDiscount_count());
         holder.cancel_count.setText(dataHolder.get(position).getCancel_count());
+
+        holder.see_details_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, EditPreviousDayRecord.class);
+                intent.putExtra("date", dataHolder.get(pos).getDate());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -56,6 +69,7 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
         TextView date, patient_count, collected_money,
                 normal_count, emergency_count, normal_paper_valid_count,
                 paper_valid_emergency_count, discount_count, cancel_count;
+        Button see_details_btn;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
             date = (TextView)itemView.findViewById(R.id.date);
@@ -67,6 +81,7 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
             paper_valid_emergency_count = (TextView)itemView.findViewById(R.id.paper_valid_emergency_count);
             discount_count = (TextView)itemView.findViewById(R.id.discount_count);
             cancel_count = (TextView)itemView.findViewById(R.id.cancel_count);
+            see_details_btn = (Button)itemView.findViewById(R.id.see_details_btn);
         }
     }
 }

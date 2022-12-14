@@ -128,6 +128,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(qry,null);
         return  cursor;
     }
+    public Cursor readDataByDate(String date) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String qry = "SELECT * FROM my_patients WHERE date = '" + date + "'";
+        Cursor cursor = db.rawQuery(qry,null);
+        return  cursor;
+    }
     public boolean updateCheckedYes(String id) {
         try {
             SQLiteDatabase myDb = this.getWritableDatabase();

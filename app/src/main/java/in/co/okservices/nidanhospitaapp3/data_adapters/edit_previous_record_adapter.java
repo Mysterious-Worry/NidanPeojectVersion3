@@ -5,20 +5,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
+import java.util.Objects;
 
 import in.co.okservices.nidanhospitaapp3.R;
-import in.co.okservices.nidanhospitaapp3.data_models.day_record_madel;
+import in.co.okservices.nidanhospitaapp3.data_models.*;
 
 public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_previous_record_adapter.myViewHolder> {
 
-    ArrayList<patient_adapter> dataHolder;
+    ArrayList<patient_model> dataHolder;
     Context context;
+
+    public edit_previous_record_adapter(ArrayList<patient_model> dataHolder, Context context) {
+        this.dataHolder = dataHolder;
+        this.context = context;
+    }
+
+    public edit_previous_record_adapter(Context context) {
+        this.context = context;
+    }
+
+    public edit_previous_record_adapter(ArrayList<patient_model> dataHolder) {
+        this.dataHolder = dataHolder;
+    }
 
     @NonNull
     @Override
@@ -29,17 +43,52 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-
+        // Setting up texts
+        holder.sr_no_txt.setText(dataHolder.get(position).getSr_no());
+        String checked = dataHolder.get(position).getChecked();
+        if(Objects.equals(checked, "yes")){
+            holder.seen_check_box.setChecked(true);
+        } else {
+            holder.seen_check_box.setChecked(false);
+        }
+        int typeDecimal = Integer.parseInt(dataHolder.get(position).getType());
+        String hexColor = String.format("#%06X", (0xFFFFFF & typeDecimal));
+        holder.type_txt.setText(getTypeByHex(hexColor));
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataHolder.size();
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
+        TextView sr_no_txt, type_txt;
+        CheckBox seen_check_box;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
+            sr_no_txt = (TextView)itemView.findViewById(R.id.sr_no_txt);
+            type_txt = (TextView)itemView.findViewById(R.id.type_txt);
+            seen_check_box = (CheckBox)itemView.findViewById(R.id.seen_check_box);
         }
+    }
+
+    /* private methods */
+    private String getTypeByHex(String hex){
+        if(hex.equals("#D10000")){
+            hex = "normal_count";
+        } else if(hex.equals("#D18400")){
+            hex = "emergency_count";
+        } else if(hex.equals("#49D100")){
+            hex = "normal_paper_valid_count";
+        } else if(hex.equals("#00D1A7")){
+            hex = "paper_valid_emergency_count";
+        } else if(hex.equals("#0023D1")){
+            hex = "discount_count";
+        } else if(hex.equals("#A400D1")){
+            hex = "cancel_count";
+        }  else if(hex.equals("#000000")){
+            hex = "black";
+        }
+        return hex;
     }
 }
