@@ -4,16 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
+import in.co.okservices.nidanhospitaapp3.MainActivity;
 import in.co.okservices.nidanhospitaapp3.R;
 import in.co.okservices.nidanhospitaapp3.costom_packages.MyDatabaseHelper;
 import in.co.okservices.nidanhospitaapp3.data_models.*;
@@ -23,6 +29,8 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
     ArrayList<patient_model> dataHolder;
     Context context;
     MyDatabaseHelper myDatabaseHelper;
+    String[] types = new String[]{"Normal", "Emergency", "Normal Paper Valid", "Paper Valid Emergency",
+            "Discount", "Cancel", "Not Checked"};
 
     public edit_previous_record_adapter(ArrayList<patient_model> dataHolder, Context context) {
         this.dataHolder = dataHolder;
@@ -58,6 +66,7 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
         } else {
             holder.seen_check_box.setChecked(false);
         }
+
         int typeDecimal = Integer.parseInt(dataHolder.get(position).getType());
         String hexColor = String.format("#%06X", (0xFFFFFF & typeDecimal));
         holder.type_txt.setText(getTypeByHex(hexColor));
@@ -90,7 +99,8 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
     }
 
     class myViewHolder extends RecyclerView.ViewHolder{
-        TextView sr_no_txt, type_txt, id_txt;
+        TextView sr_no_txt, id_txt;
+        TextView type_txt;
         CheckBox seen_check_box;
         public myViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -103,20 +113,20 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
 
     /* private methods */
     private String getTypeByHex(String hex){
-        if(hex.equals("#D10000")){
-            hex = "normal_count";
-        } else if(hex.equals("#D18400")){
-            hex = "emergency_count";
-        } else if(hex.equals("#49D100")){
-            hex = "normal_paper_valid_count";
-        } else if(hex.equals("#00D1A7")){
-            hex = "paper_valid_emergency_count";
-        } else if(hex.equals("#0023D1")){
-            hex = "discount_count";
-        } else if(hex.equals("#A400D1")){
-            hex = "cancel_count";
-        }  else if(hex.equals("#000000")){
-            hex = "black";
+        if(hex.equals("#060248")){
+            hex = "Normal";
+        } else if(hex.equals("#06024C")){
+            hex = "Emergency";
+        } else if(hex.equals("#06005B")){
+            hex = "Normal Paper Valid";
+        } else if(hex.equals("#06005A")){
+            hex = "Paper Valid Emergency";
+        } else if(hex.equals("#060249")){
+            hex = "Discount";
+        } else if(hex.equals("#06002B")){
+            hex = "Cancel";
+        }  else if(hex.equals("#060022")){
+            hex = "Not Checked";
         }
         return hex;
     }
