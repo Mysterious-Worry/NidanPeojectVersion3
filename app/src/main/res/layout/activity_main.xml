@@ -211,15 +211,15 @@
             android:orientation="horizontal"
             android:background="#FFFFFF">
 
-            <ImageButton
-                android:id="@+id/user_setting_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                app:srcCompat="@drawable/ic_baseline_settings_24"
-                android:layout_gravity="center"
-                android:background="@color/white"
-                android:layout_marginLeft="15dp"/>
+<!--            <ImageButton-->
+<!--                android:id="@+id/user_setting_btn"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_weight="0"-->
+<!--                app:srcCompat="@drawable/ic_baseline_settings_24"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:background="@color/white"-->
+<!--                android:layout_marginLeft="15dp"/>-->
             <TextView
                 android:id="@+id/date_txt"
                 android:layout_width="wrap_content"

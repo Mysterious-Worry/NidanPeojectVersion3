@@ -77,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        user_setting_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RotateAnimation rotateAnimation = (RotateAnimation)AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotate_anim);
-                view.startAnimation(rotateAnimation);
-            }
-        });
+//        user_setting_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                RotateAnimation rotateAnimation = (RotateAnimation)AnimationUtils.loadAnimation(MainActivity.this,R.anim.rotate_anim);
+//                view.startAnimation(rotateAnimation);
+//            }
+//        });
 
         day_record_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         paper_valid_emergency_txt = (TextView)findViewById(R.id.paper_valid_emergency_txt);
         discount_count_txt = (TextView)findViewById(R.id.discount_count_txt);
         cancel_txt = (TextView)findViewById(R.id.cancel_txt);
-        user_setting_btn = (ImageButton)findViewById(R.id.user_setting_btn);
+//        user_setting_btn = (ImageButton)findViewById(R.id.user_setting_btn);
         day_record_btn = (ImageButton)findViewById(R.id.day_record_btn);
 
         normal_cbx = (CheckBox)findViewById(R.id.normal_cbx);
