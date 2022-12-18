@@ -119,15 +119,15 @@ public class MainActivity extends AppCompatActivity {
         _Refresh_Btn = (Button)findViewById(R.id._Refresh_Btn);
 
         try{
-            date_txt.setText(myDB.getDate());
-            patient_count_txt.setText(String.valueOf(myDB.senderCell("patient_count")));
-            total_amount_txt.setText(String.valueOf(myDB.senderCell("collected_money")));
-            normal_count_txt.setText(String.valueOf(myDB.senderCell("normal_count")));
-            emergency_count_txt.setText(String.valueOf(myDB.senderCell("emergency_count")));
-            normal_paper_valid_count_txt.setText(String.valueOf(myDB.senderCell("normal_paper_valid_count")));
-            paper_valid_emergency_txt.setText(String.valueOf(myDB.senderCell("paper_valid_emergency_count")));
-            discount_count_txt.setText(String.valueOf(myDB.senderCell("discount_count")));
-            cancel_txt.setText(String.valueOf(myDB.senderCell("cancel_count")));
+            date_txt.setText("Date="+myDB.getDate());
+            patient_count_txt.setText("TSP="+String.valueOf(myDB.senderCell("patient_count")));
+            total_amount_txt.setText("A="+String.valueOf(myDB.senderCell("collected_money")));
+            normal_count_txt.setText("N="+String.valueOf(myDB.senderCell("normal_count")));
+            emergency_count_txt.setText("E="+String.valueOf(myDB.senderCell("emergency_count")));
+            normal_paper_valid_count_txt.setText("NPV="+String.valueOf(myDB.senderCell("normal_paper_valid_count")));
+            paper_valid_emergency_txt.setText("EPV="+String.valueOf(myDB.senderCell("paper_valid_emergency_count")));
+            discount_count_txt.setText("D="+String.valueOf(myDB.senderCell("discount_count")));
+            cancel_txt.setText("C="+String.valueOf(myDB.senderCell("cancel_count")));
         }catch (Exception ex){
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -150,15 +150,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if(Objects.equals(dayDataAdded, "Successfully inserted")){
                     Toast.makeText(this, "Data added successfully.", Toast.LENGTH_SHORT).show();
 
-                    date_txt.setText(myDB.getDate());
-                    patient_count_txt.setText(String.valueOf(myDB.senderCell("patient_count")));
-                    total_amount_txt.setText(String.valueOf(myDB.senderCell("collected_money")));
-                    normal_count_txt.setText(String.valueOf(myDB.senderCell("normal_count")));
-                    emergency_count_txt.setText(String.valueOf(myDB.senderCell("emergency_count")));
-                    normal_paper_valid_count_txt.setText(String.valueOf(myDB.senderCell("normal_paper_valid_count")));
-                    paper_valid_emergency_txt.setText(String.valueOf(myDB.senderCell("paper_valid_emergency_count")));
-                    discount_count_txt.setText(String.valueOf(myDB.senderCell("discount_count")));
-                    cancel_txt.setText(String.valueOf(myDB.senderCell("cancel_count")));
+                    date_txt.setText("Date="+myDB.getDate());
+                    patient_count_txt.setText("TSP="+String.valueOf(myDB.senderCell("patient_count")));
+                    total_amount_txt.setText("A="+String.valueOf(myDB.senderCell("collected_money")));
+                    normal_count_txt.setText("N="+String.valueOf(myDB.senderCell("normal_count")));
+                    emergency_count_txt.setText("E="+String.valueOf(myDB.senderCell("emergency_count")));
+                    normal_paper_valid_count_txt.setText("NPV="+String.valueOf(myDB.senderCell("normal_paper_valid_count")));
+                    paper_valid_emergency_txt.setText("EPV="+String.valueOf(myDB.senderCell("paper_valid_emergency_count")));
+                    discount_count_txt.setText("D="+String.valueOf(myDB.senderCell("discount_count")));
+                    cancel_txt.setText("C="+String.valueOf(myDB.senderCell("cancel_count")));
                 }
             } catch (Exception ex){
                 Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();

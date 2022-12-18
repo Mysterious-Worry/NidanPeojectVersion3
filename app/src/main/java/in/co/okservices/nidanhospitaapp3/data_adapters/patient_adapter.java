@@ -124,28 +124,33 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                                     readyToSubmit = true;
 
                                     int currentPatientCount = myDB.senderCell("patient_count");
-                                    int newPatientCount = currentPatientCount - 1;
+                                    int newPatientCount = 0;
+                                    if(currentPatientCount <= 0){
+                                        newPatientCount = 0;
+                                    } else {
+                                        newPatientCount = currentPatientCount - 1;
+                                    }
                                     myDB.updateColumn("patient_count", newPatientCount);
                                     // have to minus the amountCount, typeCount
                                     try {
                                         if(hexColor.equals("#D10000")){
                                             hexColor = "normal_count";
-                                            amount = 150;
+                                            amount = 200;
                                         } else if(hexColor.equals("#D18400")){
                                             hexColor = "emergency_count";
-                                            amount = 200;
+                                            amount = 400;
                                         } else if(hexColor.equals("#49D100")){
                                             hexColor = "normal_paper_valid_count";
-                                            amount = 150;
+                                            amount = 0;
                                         } else if(hexColor.equals("#00D1A7")){
                                             hexColor = "paper_valid_emergency_count";
-                                            amount = 150;
+                                            amount = 200;
                                         } else if(hexColor.equals("#0023D1")){
                                             hexColor = "discount_count";
-                                            amount = 150;
+                                            amount = 0;
                                         } else if(hexColor.equals("#A400D1")){
                                             hexColor = "cancel_count";
-                                            amount = 150;
+                                            amount = 100;
                                         }  else if(hexColor.equals("#000000")){
                                             hexColor = "black";
                                         }
@@ -154,8 +159,13 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                                         int newAmountCollected = currentAmountCollected - amount;
                                         myDB.updateColumn("collected_money", newAmountCollected);
 
+                                        int new_type_count = 0;
                                         int old_type_count = myDB.senderCell(hexColor);
-                                        int new_type_count = old_type_count - 1;
+                                        if(old_type_count <= 0){
+                                            new_type_count = old_type_count;
+                                        } else {
+                                            new_type_count = old_type_count - 1;
+                                        }
                                         myDB.updateColumn(hexColor, new_type_count);
                                     }catch (Exception x){
                                         Toast.makeText(context, x.getMessage(), Toast.LENGTH_LONG).show();
@@ -201,7 +211,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.normal_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.normal_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(150, "normal_count");
+                    updateDayDetails(200, "normal_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -231,7 +241,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.emergency_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.emergency_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(200, "emergency_count");
+                    updateDayDetails(400, "emergency_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -261,7 +271,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.normal_paper_valid_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.normal_paper_valid_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(150, "normal_paper_valid_count");
+                    updateDayDetails(0, "normal_paper_valid_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -291,7 +301,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.paper_valid_emergency_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.paper_valid_emergency_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(150, "paper_valid_emergency_count");
+                    updateDayDetails(200, "paper_valid_emergency_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -321,7 +331,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.discount_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.discount_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(150, "discount_count");
+                    updateDayDetails(100, "discount_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -351,7 +361,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                     myDB.setNewType(String.valueOf(R.color.cancel_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.cancel_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(150, "cancel_count");
+                    updateDayDetails(0, "cancel_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }

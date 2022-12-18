@@ -43,12 +43,12 @@ public class day_record_adapter extends RecyclerView.Adapter<day_record_adapter.
         holder.date.setText(dataHolder.get(position).getDate());
         holder.patient_count.setText(dataHolder.get(position).getPatient_count());
         holder.collected_money.setText(dataHolder.get(position).getCollected_money());
-        holder.normal_count.setText(dataHolder.get(position).getNormal_count());
-        holder.emergency_count.setText(dataHolder.get(position).getEmergency_count());
-        holder.normal_paper_valid_count.setText(dataHolder.get(position).getNormal_paper_valid_count());
-        holder.paper_valid_emergency_count.setText(dataHolder.get(position).getPaper_valid_emergency_count());
-        holder.discount_count.setText(dataHolder.get(position).getDiscount_count());
-        holder.cancel_count.setText(dataHolder.get(position).getCancel_count());
+        holder.normal_count.setText("Normal = " + dataHolder.get(position).getNormal_count());
+        holder.emergency_count.setText("Emergency = " + dataHolder.get(position).getEmergency_count());
+        holder.normal_paper_valid_count.setText("Normal Paper\nValid = " + dataHolder.get(position).getNormal_paper_valid_count());
+        holder.paper_valid_emergency_count.setText("Emergency Paper\nValid = " + dataHolder.get(position).getPaper_valid_emergency_count());
+        holder.discount_count.setText("Discount = " + dataHolder.get(position).getDiscount_count());
+        holder.cancel_count.setText("Cancle = " + dataHolder.get(position).getCancel_count());
 
         holder.see_details_btn.setOnClickListener(new View.OnClickListener() {
             @Override
