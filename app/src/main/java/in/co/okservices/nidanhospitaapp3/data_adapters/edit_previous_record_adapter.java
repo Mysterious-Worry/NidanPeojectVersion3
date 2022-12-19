@@ -115,13 +115,13 @@ public class edit_previous_record_adapter extends RecyclerView.Adapter<edit_prev
     private String getTypeByHex(String hex){
         if(hex.equals("#060248")){
             hex = "Normal";
-        } else if(hex.equals("#06024C")){
-            hex = "Emergency";
         } else if(hex.equals("#06005B")){
-            hex = "Normal Paper Valid";
-        } else if(hex.equals("#06005A")){
-            hex = "Paper Valid Emergency";
+            hex = "Emergency";
         } else if(hex.equals("#060249")){
+            hex = "Normal Paper Valid";
+        } else if(hex.equals("#06024C")){
+            hex = "Paper Valid Emergency";
+        } else if(hex.equals("#06005A")){
             hex = "Discount";
         } else if(hex.equals("#06002B")){
             hex = "Cancel";

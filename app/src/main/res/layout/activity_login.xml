@@ -54,15 +54,16 @@
 
         <Button
             android:id="@+id/_Login_Btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
             android:text="Login"
             android:fontFamily="@font/ubuntu"
             android:textStyle="bold"
             android:textColor="@color/white"
             android:background="@drawable/btn_bg"
             android:layout_marginHorizontal="125dp"
-            android:layout_marginTop="25dp"/>
+            android:layout_marginTop="25dp"
+            android:paddingHorizontal="35dp"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

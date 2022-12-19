@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
             } catch (Exception e) {
                 Toast.makeText(this, e.getMessage().trim(), Toast.LENGTH_SHORT).show();
             }
-            patient_adapter adapter = new patient_adapter(dataHolder, this);
+            patient_adapter adapter = new patient_adapter(dataHolder, this, recycler_view);
             recycler_view.setAdapter(adapter);
         }
 

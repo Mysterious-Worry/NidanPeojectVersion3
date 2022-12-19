@@ -13,15 +13,15 @@
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/normal_paper_valid_cbx_clr.xml" value="0.2395" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/paper_valid_emergency_cbx.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/patient_cell.xml" value="0.2405" />
-        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_day_record.xml" value="0.4" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_day_record.xml" value="0.264" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_edit_previous_day_record.xml" value="0.234375" />
-        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_login.xml" value="0.234375" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_update_amount.xml" value="0.234375" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/day_details_row.xml" value="0.234375" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/dropdown_txt_vew.xml" value="0.234375" />
-        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/patient_detail_row.xml" value="0.23333333333333334" />
-        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/patient_row.xml" value="0.234375" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/patient_detail_row.xml" value="0.1" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/patient_row.xml" value="0.4" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/type_list.xml" value="0.23645833333333333" />
       </map>
     </option>

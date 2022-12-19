@@ -31,10 +31,12 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
     boolean readyToSubmit = false;
     CheckBox normal_cbx, emergency_cbx, normal_paper_valid_cbx,
             paper_valid_emergency_cbx, discount_cbx, cancel_cbx;
+    RecyclerView recyclerView;
 
-    public patient_adapter(ArrayList<patient_model> dataHolder, Context context) {
+    public patient_adapter(ArrayList<patient_model> dataHolder, Context context, RecyclerView recyclerView) {
         this.dataHolder = dataHolder;
         this.context = context;
+        this.recyclerView = recyclerView;
         initMainClassViews();
         normal_cbx.setEnabled(false);
         emergency_cbx.setEnabled(false);
@@ -103,6 +105,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                             discount_cbx.setEnabled(true);
                             cancel_cbx.setEnabled(true);
                             readyToSubmit = true;
+                            disableRecyclerView();
                         } else if(checked.equals("yes")) {
                             boolean query = myDB.updateCheckedNo(id);
                             if (query) {
@@ -125,9 +128,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
 
                                     int currentPatientCount = myDB.senderCell("patient_count");
                                     int newPatientCount = 0;
-                                    if(currentPatientCount <= 0){
-                                        newPatientCount = 0;
-                                    } else {
+                                    if(currentPatientCount > 0){
                                         newPatientCount = currentPatientCount - 1;
                                     }
                                     myDB.updateColumn("patient_count", newPatientCount);
@@ -176,10 +177,11 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                             } else {
                                 Toast.makeText(context, "Error at saving data!", Toast.LENGTH_SHORT).show();
                             }
+                            disableRecyclerView();
                         }
                     } else {
                         Toast.makeText(context, "Please submit to add more records.", Toast.LENGTH_SHORT).show();
-                        holder.item.setChecked(holder.item.isChecked());
+                        holder.item.setChecked(!holder.item.isChecked());
                     }
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -380,6 +382,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             super(itemView);
 
             item = (CheckBox)itemView.findViewById(R.id.cbx_patient);
+            itemView.setTag((RecyclerView)((MainActivity)context).findViewById(R.id.recycler_view));
         }
     }
 
@@ -390,6 +393,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
         paper_valid_emergency_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.paper_valid_emergency_cbx);
         discount_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.discount_cbx);
         cancel_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.cancel_cbx);
+        recyclerView = (RecyclerView)((MainActivity)context).findViewById(R.id.recycler_view);
     }
     private void updateDayDetails(int amount, String type_count){
         try {
@@ -439,5 +443,9 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             Log.e("updateDayDetails", ex.getMessage());
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void disableRecyclerView() {
+        recyclerView.setEnabled(false);
     }
 }
