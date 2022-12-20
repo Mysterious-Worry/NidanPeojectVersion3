@@ -6,11 +6,19 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.zip.DeflaterInputStream;
 
 import in.co.okservices.nidanhospitaapp3.R;
@@ -19,7 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "PatientLibrary.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     private static final String TABLE_NAME = "my_patients";
     private static final String COLUMN_ID = "_id";
@@ -38,6 +46,11 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String DAY_PAPER_VALID_EMERGENCY = "paper_valid_emergency_count";
     private static final String DAY_DISCOUNT = "discount_count";
     private static final String DAY_CANCEL = "cancel_count";
+    private static final String DAY_ADD_AMOUNT = "add_amount_count";
+
+    private static final String PAYMENT_HISTORY_TABLE_NAME = "payment_history";
+    private static final String COLUMN_AMOUNT = "amount";
+    private static final String COLUMN_TIME = "time";
 
     private static final String queryPatientTable = "CREATE TABLE " + TABLE_NAME +
             " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -56,7 +69,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             DAY_NORMAL_PAPER_VALID + " TEXT, " +
             DAY_PAPER_VALID_EMERGENCY + " TEXT, " +
             DAY_DISCOUNT + " TEXT, " +
-            DAY_CANCEL + " TEXT);";
+            DAY_CANCEL + " TEXT," +
+            DAY_ADD_AMOUNT + " TEXT);";
+
+    private static final String queryPaymentHistoryTable = "CREATE TABLE " + PAYMENT_HISTORY_TABLE_NAME +
+            " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            COLUMN_SR_NO + " INT, " +
+            COLUMN_DATE + " TEXT, " +
+            COLUMN_TIME + " TEXT, " +
+            COLUMN_TYPE + " TEXT, " +
+            COLUMN_AMOUNT + " TEXT);";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -68,6 +90,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         try{
             sqLiteDatabase.execSQL(queryPatientTable);
             sqLiteDatabase.execSQL(queryDayTable);
+            sqLiteDatabase.execSQL(queryPaymentHistoryTable);
         } catch (Exception ex){
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
             Log.e("dbAdapter", ex.getMessage());
@@ -79,6 +102,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         try {
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME + ";");
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + DAY_TABLE_NAME + ";");
+            sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + PAYMENT_HISTORY_TABLE_NAME + ";");
         } catch (Exception ex){
             Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
         }
@@ -122,6 +146,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         java.sql.Date date = new java.sql.Date(millis);
         return date.toString().trim();
     }
+
+    public String getTime(){
+        Calendar calendar = Calendar.getInstance();
+        Date currentTime = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss a");
+        return dateFormat.format(currentTime);
+    }
+
     public Cursor readalldata() {
         SQLiteDatabase db = this.getWritableDatabase();
         String qry = "SELECT * FROM my_patients WHERE date = '" + getDate() + "'";
@@ -237,5 +269,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT * FROM " + DAY_TABLE_NAME + " WHERE " + COLUMN_DATE + " LIKE '%" + month + "%';";
         return db.rawQuery(query, null);
+    }
+
+    public void insertPaymentHistory(String sr_no, String type, int amount){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_SR_NO, sr_no);
+        cv.put(COLUMN_DATE, getDate());
+        cv.put(COLUMN_TIME, getTime());
+        cv.put(COLUMN_TYPE, type);
+        cv.put(COLUMN_AMOUNT, amount);
+        sqLiteDatabase.insert(DAY_TABLE_NAME  ,null,cv);
     }
 }

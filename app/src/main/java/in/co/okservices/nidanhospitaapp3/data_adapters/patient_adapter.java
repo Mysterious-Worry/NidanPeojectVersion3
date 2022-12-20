@@ -7,9 +7,12 @@ import android.database.Cursor;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,11 +30,12 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
     ArrayList<patient_model> dataHolder;
     Context context;
     MyDatabaseHelper myDB;
-    TextView selected_patient, type_patient;
+    TextView selected_patient, type_patient, sr_no_patient;
     boolean readyToSubmit = false;
     CheckBox normal_cbx, emergency_cbx, normal_paper_valid_cbx,
             paper_valid_emergency_cbx, discount_cbx, cancel_cbx;
     RecyclerView recyclerView;
+    EditText discount_percent_txt;
 
     public patient_adapter(ArrayList<patient_model> dataHolder, Context context, RecyclerView recyclerView) {
         this.dataHolder = dataHolder;
@@ -44,6 +48,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
         paper_valid_emergency_cbx.setEnabled(false);
         discount_cbx.setEnabled(false);
         cancel_cbx.setEnabled(false);
+        discount_percent_txt.setEnabled(false);
     }
 
     @NonNull
@@ -61,6 +66,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
         String checked = dataHolder.get(position).getChecked();
         String id = dataHolder.get(position).getId();
         String type = dataHolder.get(position).getType();
+        String sr_no = dataHolder.get(position).getSr_no();
         initMainClassViews();
 
 
@@ -86,7 +92,8 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                 selected_patient.setText(id);
                 type_patient = (TextView)((MainActivity)context).findViewById(R.id.type_patient);
                 type_patient.setText(type);
-
+                sr_no_patient = (TextView)((MainActivity)context).findViewById(R.id.sr_no_patient);
+                sr_no_patient.setText(sr_no);
                 try{
                     if(readyToSubmit == false){
                         if(checked.equals("no")) {
@@ -104,6 +111,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                             paper_valid_emergency_cbx.setEnabled(true);
                             discount_cbx.setEnabled(true);
                             cancel_cbx.setEnabled(true);
+                            discount_percent_txt.setEnabled(true);
                             readyToSubmit = true;
                             disableRecyclerView();
                         } else if(checked.equals("yes")) {
@@ -194,26 +202,28 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             @Override
             public void onClick(View view) {
                 try{
+                    int amount = 200;
                     if(emergency_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.emergencyC )+ "");
                         emergency_cbx.setChecked(false);
                     } else if(normal_paper_valid_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.normal_paper_validC) + "");
                         normal_paper_valid_cbx.setChecked(false);
                     } else if(paper_valid_emergency_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.paper_valid_emergencyC) + "");
                         paper_valid_emergency_cbx.setChecked(false);
                     } else if(discount_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.discountC) + "");
                         discount_cbx.setChecked(false);
                     } else if(cancel_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "");
                         cancel_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.normal_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.normal_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(200, "normal_count");
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.normal_cbx), amount);
+                    updateDayDetails(amount, "normal_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -225,24 +235,26 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             public void onClick(View view) {
                 try{
                     if(normal_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normalC) + "");
                         normal_cbx.setChecked(false);
                     } else if(normal_paper_valid_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.normal_paper_validC) + "");
                         normal_paper_valid_cbx.setChecked(false);
                     } else if(paper_valid_emergency_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.paper_valid_emergencyC) + "");
                         paper_valid_emergency_cbx.setChecked(false);
                     } else if(discount_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.discountC) + "");
                         discount_cbx.setChecked(false);
                     } else if(cancel_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "");
                         cancel_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.emergency_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.emergency_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
+                    int amount = 400;
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.emergency_cbx), amount);
                     updateDayDetails(400, "emergency_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -255,24 +267,26 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             public void onClick(View view) {
                 try{
                     if(normal_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normalC) + "");
                         normal_cbx.setChecked(false);
                     } else if(emergency_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.emergencyC) + "");
                         emergency_cbx.setChecked(false);
                     } else if(paper_valid_emergency_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.paper_valid_emergencyC + ""));
                         paper_valid_emergency_cbx.setChecked(false);
                     } else if(discount_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.discountC) + "");
                         discount_cbx.setChecked(false);
                     } else if(cancel_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "");
                         cancel_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.normal_paper_valid_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.normal_paper_valid_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
+                    int amount = 0;
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.normal_paper_valid_cbx), amount);
                     updateDayDetails(0, "normal_paper_valid_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -285,24 +299,26 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             public void onClick(View view) {
                 try{
                     if(normal_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normalC) + "");
                         normal_cbx.setChecked(false);
                     } else if(emergency_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.emergencyC) + "");
                         emergency_cbx.setChecked(false);
                     } else if(normal_paper_valid_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normal_paper_validC) + "");
                         normal_paper_valid_cbx.setChecked(false);
                     } else if(discount_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.discountC) + "");
                         discount_cbx.setChecked(false);
                     } else if(cancel_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "");
                         cancel_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.paper_valid_emergency_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.paper_valid_emergency_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
+                    int amount = 200;
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.paper_valid_emergency_cbx), amount);
                     updateDayDetails(200, "paper_valid_emergency_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -315,25 +331,27 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             public void onClick(View view) {
                 try{
                     if(normal_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normalC) + "");
                         normal_cbx.setChecked(false);
                     } else if(emergency_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.emergencyC) + "");
                         emergency_cbx.setChecked(false);
                     } else if(normal_paper_valid_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normal_paper_validC) + "");
                         normal_paper_valid_cbx.setChecked(false);
                     } else if(paper_valid_emergency_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.paper_valid_emergencyC) + "");
                         paper_valid_emergency_cbx.setChecked(false);
                     } else if(cancel_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "");
                         cancel_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.discount_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.discount_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
-                    updateDayDetails(100, "discount_count");
+                    int amount = Integer.parseInt(discount_percent_txt.getText().toString()) * 2;
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.emergency_cbx), amount);
+                    updateDayDetails(amount*2, "discount_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
@@ -345,24 +363,26 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
             public void onClick(View view) {
                 try{
                     if(normal_cbx.isChecked()){
-                        removeDayDetails("emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normalC) + "");
                         normal_cbx.setChecked(false);
                     } else if(emergency_cbx.isChecked()){
-                        removeDayDetails("normal_paper_valid_count");
+                        removeDayDetails(String.valueOf(R.string.emergencyC) + "");
                         emergency_cbx.setChecked(false);
                     } else if(normal_paper_valid_cbx.isChecked()){
-                        removeDayDetails("paper_valid_emergency_count");
+                        removeDayDetails(String.valueOf(R.string.normal_paper_validC) + "");
                         normal_paper_valid_cbx.setChecked(false);
                     } else if(paper_valid_emergency_cbx.isChecked()){
-                        removeDayDetails("discount_count");
+                        removeDayDetails(String.valueOf(R.string.paper_valid_emergencyC) + "");
                         paper_valid_emergency_cbx.setChecked(false);
-                    } else if(discount_cbx.isChecked()){
-                        removeDayDetails("cancel_count");
+                    }else if(discount_cbx.isChecked()){
+                        removeDayDetails(String.valueOf(R.string.cancelC) + "" );
                         discount_cbx.setChecked(false);
                     }
                     myDB.setNewType(String.valueOf(R.color.cancel_cbx), selected_patient.getText().toString());
                     holder.item.setTextColor(context.getResources().getColor(R.color.cancel_cbx));
                     Toast.makeText(context, "Refresh to reload data.", Toast.LENGTH_SHORT).show();
+                    int amount = 0;
+                    myDB.insertPaymentHistory(sr_no_patient.getText().toString(), String.valueOf(R.color.cancel_cbx), amount);
                     updateDayDetails(0, "cancel_count");
                 } catch (Exception ex){
                     Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
@@ -394,6 +414,7 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
         discount_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.discount_cbx);
         cancel_cbx = (CheckBox)((MainActivity)context).findViewById(R.id.cancel_cbx);
         recyclerView = (RecyclerView)((MainActivity)context).findViewById(R.id.recycler_view);
+        discount_percent_txt = ((MainActivity)context).findViewById(R.id.discount_percent_txt);
     }
     private void updateDayDetails(int amount, String type_count){
         try {
@@ -416,15 +437,23 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
     private void removeDayDetails(String type){
         short amount = 0;
         switch (type) {
-            case "normal_count":
-            case "discount_count":
-            case "normal_paper_valid_count":
-            case "paper_valid_emergency_count":
-            case "cancel_count":
-                amount = 150;
-                break;
-            case "emergency_count":
+            case R.string.normalC + "":
                 amount = 200;
+                break;
+            case R.string.discountC + "":
+                amount = 100;
+                break;
+            case R.string.normal_paper_validC + "":
+                amount = 0;
+                break;
+            case R.string.paper_valid_emergencyC + "":
+                amount = 200;
+                break;
+            case R.string.cancelC + "":
+                amount = 0;
+                break;
+            case R.string.emergencyC + "":
+                amount = 400;
                 break;
         }
         try {

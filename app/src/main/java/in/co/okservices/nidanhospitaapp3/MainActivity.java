@@ -12,6 +12,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recycler_view;
     Button _Refresh_Btn;
+    EditText discount_percent_txt;
     ImageButton user_setting_btn, day_record_btn;
     CheckBox normal_cbx, emergency_cbx, normal_paper_valid_cbx,
             paper_valid_emergency_cbx, discount_cbx, cancel_cbx;
@@ -117,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
         discount_cbx = (CheckBox)findViewById(R.id.discount_cbx);
         cancel_cbx = (CheckBox)findViewById(R.id.cancel_cbx);
         _Refresh_Btn = (Button)findViewById(R.id._Refresh_Btn);
+
+        discount_percent_txt = (EditText)findViewById(R.id.discount_percent_txt);
 
         try{
             date_txt.setText("Date="+myDB.getDate());

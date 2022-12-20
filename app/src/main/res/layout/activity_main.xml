@@ -69,6 +69,14 @@
                     android:text="-- "
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginBottom="10dp" />
+
+                <TextView
+                    android:id="@+id/sr_no_patient"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-- "
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -87,14 +95,46 @@
                     android:textColor="#00D1A7"
                     android:text="Paper valid emergency" />
 
-                <CheckBox
-                    android:id="@+id/discount_cbx"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:minHeight="48dp"
-                    android:textColor="#0023D1"
-                    android:text="Discount" />
+                    android:orientation="horizontal">
+                    <CheckBox
+                        android:id="@+id/discount_cbx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:minHeight="48dp"
+                        android:textColor="#0023D1"
+                        android:text="Discount"
+                        android:layout_weight="8"/>
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/discount_percent_txt"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:background="@color/white"-->
+<!--                        android:elevation="10dp"-->
+<!--                        android:ems="10"-->
+<!--                        android:fontFamily="@font/ubuntu"-->
+<!--                        android:hint="%"-->
+<!--                        android:text="100"-->
+<!--                        android:inputType="number"-->
+<!--                        android:layout_weight="9"-->
+<!--                        android:layout_margin="10dp"-->
+<!--                        android:paddingHorizontal="10dp"/>-->
+
+                    <EditText
+                        android:id="@+id/discount_percent_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_weight="9"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:layout_margin="10dp"
+                        android:paddingHorizontal="10dp"/>
+
+                </LinearLayout>
 
                 <CheckBox
                     android:id="@+id/cancel_cbx"
