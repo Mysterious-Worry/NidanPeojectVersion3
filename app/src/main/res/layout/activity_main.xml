@@ -34,7 +34,8 @@
                     android:layout_margin="10dp"
                     android:minHeight="48dp"
                     android:textColor="#D10000"
-                    android:text="Normal" />
+                    android:text="Normal"
+                    android:textSize="18dp"/>
 
                 <CheckBox
                     android:id="@+id/emergency_cbx"
@@ -43,7 +44,8 @@
                     android:layout_margin="10dp"
                     android:minHeight="48dp"
                     android:textColor="#D18400"
-                    android:text="Emergency" />
+                    android:text="Emergency"
+                    android:textSize="18dp"/>
 
                 <CheckBox
                     android:id="@+id/normal_paper_valid_cbx"
@@ -52,7 +54,8 @@
                     android:layout_margin="10dp"
                     android:minHeight="48dp"
                     android:textColor="#49D100"
-                    android:text="Normal paper valid" />
+                    android:text="Normal paper valid"
+                    android:textSize="18dp"/>
 
                 <TextView
                     android:id="@+id/selected_patient"
@@ -93,7 +96,8 @@
                     android:layout_margin="10dp"
                     android:minHeight="48dp"
                     android:textColor="#00D1A7"
-                    android:text="Paper valid emergency" />
+                    android:text="Paper valid emergency"
+                    android:textSize="18dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,7 +111,8 @@
                         android:minHeight="48dp"
                         android:textColor="#0023D1"
                         android:text="Discount"
-                        android:layout_weight="8"/>
+                        android:layout_weight="8"
+                        android:textSize="18dp"/>
 
 <!--                    <EditText-->
 <!--                        android:id="@+id/discount_percent_txt"-->
@@ -143,7 +148,8 @@
                     android:layout_margin="10dp"
                     android:minHeight="48dp"
                     android:textColor="#A400D1"
-                    android:text="Cancel" />
+                    android:text="Cancel"
+                    android:textSize="18dp"/>
 
                 <Button
                     android:id="@+id/_Refresh_Btn"

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         initViews();
         insertDataOfTheDay();
         recycler_view = (RecyclerView)findViewById(R.id.recycler_view);
-        recycler_view.setLayoutManager(new GridLayoutManager(this, 9));
+        recycler_view.setLayoutManager(new GridLayoutManager(this, 5));
         cursor = new MyDatabaseHelper(this).readalldata();
         dataHolder = new ArrayList<>();
 

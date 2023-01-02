@@ -1,7 +1,9 @@
 package in.co.okservices.nidanhospitaapp3.data_adapters;
 
+import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -115,77 +117,89 @@ public class patient_adapter extends RecyclerView.Adapter<patient_adapter.myView
                             readyToSubmit = true;
                             disableRecyclerView();
                         } else if(checked.equals("yes")) {
-                            boolean query = myDB.updateCheckedNo(id);
-                            if (query) {
-                                try{
-                                    int typeOctal = holder.item.getCurrentTextColor();
-                                    String hexColor = String.format("#%06X", (0xFFFFFF & typeOctal));
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                            builder.setMessage("Do you really wanna delete this record?");
+                            builder.setTitle("Alert !");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+                                boolean query = myDB.updateCheckedNo(id);
+                                if (query) {
+                                    try{
+                                        int typeOctal = holder.item.getCurrentTextColor();
+                                        String hexColor = String.format("#%06X", (0xFFFFFF & typeOctal));
 
-                                    int amount = 0;
-                                    myDB.setNewType(String.valueOf(R.color.black), selected_patient.getText().toString());
-                                    holder.item.setTextColor(context.getResources().getColor(R.color.black));
-                                    Toast.makeText(context, "Data deleted", Toast.LENGTH_SHORT).show();
-                                    Toast.makeText(context, "Submit to reload data.", Toast.LENGTH_SHORT).show();
-                                    normal_cbx.setEnabled(false);
-                                    emergency_cbx.setEnabled(false);
-                                    normal_paper_valid_cbx.setEnabled(false);
-                                    paper_valid_emergency_cbx.setEnabled(false);
-                                    discount_cbx.setEnabled(false);
-                                    cancel_cbx.setEnabled(false);
-                                    readyToSubmit = true;
+                                        int amount = 0;
+                                        myDB.setNewType(String.valueOf(R.color.black), selected_patient.getText().toString());
+                                        holder.item.setTextColor(context.getResources().getColor(R.color.black));
+                                        Toast.makeText(context, "Data deleted", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(context, "Submit to reload data.", Toast.LENGTH_SHORT).show();
+                                        normal_cbx.setEnabled(false);
+                                        emergency_cbx.setEnabled(false);
+                                        normal_paper_valid_cbx.setEnabled(false);
+                                        paper_valid_emergency_cbx.setEnabled(false);
+                                        discount_cbx.setEnabled(false);
+                                        cancel_cbx.setEnabled(false);
+                                        readyToSubmit = true;
 
-                                    int currentPatientCount = myDB.senderCell("patient_count");
-                                    int newPatientCount = 0;
-                                    if(currentPatientCount > 0){
-                                        newPatientCount = currentPatientCount - 1;
-                                    }
-                                    myDB.updateColumn("patient_count", newPatientCount);
-                                    // have to minus the amountCount, typeCount
-                                    try {
-                                        if(hexColor.equals("#D10000")){
-                                            hexColor = "normal_count";
-                                            amount = 200;
-                                        } else if(hexColor.equals("#D18400")){
-                                            hexColor = "emergency_count";
-                                            amount = 400;
-                                        } else if(hexColor.equals("#49D100")){
-                                            hexColor = "normal_paper_valid_count";
-                                            amount = 0;
-                                        } else if(hexColor.equals("#00D1A7")){
-                                            hexColor = "paper_valid_emergency_count";
-                                            amount = 200;
-                                        } else if(hexColor.equals("#0023D1")){
-                                            hexColor = "discount_count";
-                                            amount = 0;
-                                        } else if(hexColor.equals("#A400D1")){
-                                            hexColor = "cancel_count";
-                                            amount = 100;
-                                        }  else if(hexColor.equals("#000000")){
-                                            hexColor = "black";
+                                        int currentPatientCount = myDB.senderCell("patient_count");
+                                        int newPatientCount = 0;
+                                        if(currentPatientCount > 0){
+                                            newPatientCount = currentPatientCount - 1;
                                         }
+                                        myDB.updateColumn("patient_count", newPatientCount);
+                                        // have to minus the amountCount, typeCount
+                                        try {
+                                            if(hexColor.equals("#D10000")){
+                                                hexColor = "normal_count";
+                                                amount = 200;
+                                            } else if(hexColor.equals("#D18400")){
+                                                hexColor = "emergency_count";
+                                                amount = 400;
+                                            } else if(hexColor.equals("#49D100")){
+                                                hexColor = "normal_paper_valid_count";
+                                                amount = 0;
+                                            } else if(hexColor.equals("#00D1A7")){
+                                                hexColor = "paper_valid_emergency_count";
+                                                amount = 200;
+                                            } else if(hexColor.equals("#0023D1")){
+                                                hexColor = "discount_count";
+                                                amount = 0;
+                                            } else if(hexColor.equals("#A400D1")){
+                                                hexColor = "cancel_count";
+                                                amount = 100;
+                                            }  else if(hexColor.equals("#000000")){
+                                                hexColor = "black";
+                                            }
 
-                                        int currentAmountCollected = myDB.senderCell("collected_money");
-                                        int newAmountCollected = currentAmountCollected - amount;
-                                        myDB.updateColumn("collected_money", newAmountCollected);
+                                            int currentAmountCollected = myDB.senderCell("collected_money");
+                                            int newAmountCollected = currentAmountCollected - amount;
+                                            myDB.updateColumn("collected_money", newAmountCollected);
 
-                                        int new_type_count = 0;
-                                        int old_type_count = myDB.senderCell(hexColor);
-                                        if(old_type_count <= 0){
-                                            new_type_count = old_type_count;
-                                        } else {
-                                            new_type_count = old_type_count - 1;
+                                            int new_type_count = 0;
+                                            int old_type_count = myDB.senderCell(hexColor);
+                                            if(old_type_count <= 0){
+                                                new_type_count = old_type_count;
+                                            } else {
+                                                new_type_count = old_type_count - 1;
+                                            }
+                                            myDB.updateColumn(hexColor, new_type_count);
+                                        }catch (Exception x){
+                                            Toast.makeText(context, x.getMessage(), Toast.LENGTH_LONG).show();
                                         }
-                                        myDB.updateColumn(hexColor, new_type_count);
-                                    }catch (Exception x){
-                                        Toast.makeText(context, x.getMessage(), Toast.LENGTH_LONG).show();
+                                    } catch (Exception ex) {
+                                        Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
                                     }
-                                } catch (Exception ex) {
-                                    Toast.makeText(context, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Error at saving data!", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                Toast.makeText(context, "Error at saving data!", Toast.LENGTH_SHORT).show();
-                            }
-                            disableRecyclerView();
+                                disableRecyclerView();
+                            });
+                            builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+
+                                dialog.cancel();
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
                         }
                     } else {
                         Toast.makeText(context, "Please submit to add more records.", Toast.LENGTH_SHORT).show();

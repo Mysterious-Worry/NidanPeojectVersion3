@@ -9,12 +9,15 @@
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/day_record_search_btn.xml" value="0.2395" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/discount_cbx_clr.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/emergency_cbx_clr.xml" value="0.2395" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/ic_baseline_list_24.xml" value="0.2405" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/ic_baseline_person_search_24.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/normal_cbx.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/normal_paper_valid_cbx_clr.xml" value="0.2395" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/paper_valid_emergency_cbx.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/drawable/patient_cell.xml" value="0.2405" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_day_record.xml" value="0.264" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_edit_previous_day_record.xml" value="0.234375" />
+        <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_home.xml" value="0.264" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_login.xml" value="0.1" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Main Projects/NidanHospitaApp3/app/src/main/res/layout/activity_update_amount.xml" value="0.234375" />
